@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/index.css">
+    <title>Git lesson</title>
+</head>
+<body>
+	<div class="page page-table">
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> <span data-translate="LBL_FINANCICAL_RECEIPT_CREATION_HEADER"></span> </strong></div>
+        <div class="panel-body">
+            <section class="receipt">
+                <div>
+                    <ul class="nav nav-pills tabs" id="myTab">
+                    	<li class="active">
+                            <a href="/">Головна</a>
+                        </li>
+                        <li>
+                            <a href="lands.html">Земельні ділянки</a>
+                        </li>
+                        <li>
+                            <a href="pledge.html">Предмет застави</a>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
+                <div class="row">
+                    <form role="form" name="ctrl.creationForm" class="col-md-8 col-md-offset-2" novalidate>
+
+                        <!--Delivery terms tab-->
+                    
+						<label><span>Field name</span></label>
+							<input type="number" class="form-control"
+								   name="CreditorTaxCode"
+								   ng-model="ctrl.creationModel.creditor.taxCode"
+								   ng-maxlength="256"
+								   required>
+							<div class="help-block error" ng-messages="ctrl.creationForm.CreditorTaxCode.$error">
+								<p ng-message="maxlength"><span data-translate="ERR_TAXCODE_JURISTICAL_TOO_LONG"></span></p>
+								<p ng-message="required"><span data-translate="ERR_TAXCODE_JURISTICAL_REQUIRED"></span></p>
+						</div>
+                        <!--Lend plots tab-->
+                        <!--<div ng-show="ctrl.currentTab == 5">
+                            <h1>page</h1>5
+                        </div>-->
+
+                        <!--Pledge subject tab-->
+                        <!--<div ng-show="ctrl.currentTab == 6">
+                            <h1>page</h1>6
+                        </div>-->
+
+                    </form>
+                </div>
+                <ng-view></ng-view>
+                <div>
+                    <a href="index.html" class="btn btn-default"  data-translate="LBL_CLOSE">prev</a>
+                    <a href="lands.html" class="btn btn-default pull-right" data-translate="LBL_NEXT">next</a>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+<script src="libs/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ua" ng-app="tableApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<title>Lands</title>
+</head>
+<body ng-controller="tableController">
+	<div class="page page-table">
+		<section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> <span data-translate="LBL_FINANCICAL_RECEIPT_CREATION_HEADER"></span> </strong></div>
+        <div class="panel-body">
+            <section class="receipt">
+                <div>
+                	<ul class="nav nav-pills tabs" id="myTab">
+                		<li>
+                            <a href="index.html">Головна</a>
+                        </li>
+                        <li class="active">
+                			<a href="lands.html">Земельні ділянки</a>
+                		</li>
+                		<li>
+                		<a href="pledge.html">Предмет застави</a>
+                		</li>
+                        
+                    </ul>
+                </div>
+                <hr />
+                <div class="container">
+                	<table class="table">
+                		<thead>
+                			<tr>
+                				<th></th>
+                				<th>Кадастровий номер</th>
+                				<th>Область, район</th>
+                				<th>Документ</th>
+                				<th>ЗК</th>
+                				<th>З</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<!-- <tr>
+                				<td>
+                					<a href="#"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>
+                					<a href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                				</td>
+                				<td>123456789</td>
+                				<td>Миколаївська обл. Арбузинський р-н</td>
+                				<td class="short-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam similique amet eum totam ad a in sed, velit reiciendis aliquam.</td>
+                				<td><input type="checkbox"></td>
+                				<td>0</td>
+                			</tr>
+                			<tr>
+                				<td>
+                					<a href="#"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>
+                					<a href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                				</td>
+                				<td>123456789</td>
+                				<td>Миколаївська обл. Арбузинський р-н</td>
+                				<td class="short-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis architecto consequuntur facere accusamus. Voluptatibus aut et dignissimos nisi in, nostrum.</td>
+                				<td><input type="checkbox" disabled></td>
+                				<td>0</td>
+                			</tr> -->
+                			<tr ng-repeat="task in locArray">
+                				<td>
+                					<a href="#" ng-click="delTr(index)" ><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>
+                					<a href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                				</td>
+                				<td >{{task.number}}</td>
+                				<td>{{task.region}} {{task.district}} {{task.settlement}}</td>
+                				<td class="short-text">{{task.doc | limitTo:20}}</td>
+                				<td><input type="checkbox"></td>
+                				<td>2</td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+                <div class="container">
+                	<form class="form-horizontal col-sm-12 col-lg-8 col-lg-offset-2" role="form" ng-submit="addNew()">
+                		<div class="form-group">
+                			<label for="number" class="col-sm-4 control-label">Кадастровий номер*</label>
+                			<div class="input-append col-sm-8">
+                				<input type="number" id="number" class="span4 search-query form-control" ng-model="number">
+                				<button type="button" class="btn btn-primary pull-right btn-margin button-custom col-xs-12 col-sm-2 col-md-2">Шукати</button>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<label for="text" class="col-sm-4 control-label">Документ, що посвідчує право власності/користування ділянкою*</label>
+                			<div class="col-sm-8">
+                				<textarea name="" id="text" cols="50" rows="4" class="form-control" ng-model="doc"></textarea>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<label for="region" class="col-sm-4 control-label">Область*</label>
+                			<div class="col-sm-8">
+                				<select name="region" id="region" class="form-control" ng-model="region">
+                					<option value=""></option>
+                					<option value="Львівська">Львівська</option>
+                					<option value="Київська">Київська</option>
+                					<option value="Закарпатська">Закарпатська</option>
+                					<option value="Запоріжська">Запоріжська</option>
+                				</select>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<label for="district" class="col-sm-4 control-label">Район*</label>
+                			<div class="col-sm-8">
+                				<select name="district" id="district" class="form-control" ng-model="district">
+                					<option value=""></option>
+                					<option value="Жидачівський">Жидачівський</option>
+                					<option value="Жовківський">Жовківський</option>
+                					<option value="Золочівський">Золочівський</option>
+                					<option value="Кам'янка-Бузький">Кам'янка-Бузький</option>
+                				</select>
+                			</div>
+                		</div>
+                		<div class="form-group">
+                			<label for="settlement" class="col-sm-4 control-label">Населений пункт*</label>
+                			<div class="col-sm-8">
+                				<select name="settlement" id="settlement" class="form-control" ng-model="settlement">
+                					<option value=""></option>
+                					<option value="Жидачів">Жидачів</option>
+                					<option value="Жовква">Жовква</option>
+                					<option value="Золочів">Золочів</option>
+                					<option value="Кам'янка-Бузька">Кам'янка-Бузька</option>
+                				</select>
+                			</div>
+                		</div>
+                		<input type="submit" value="Додати ділянку" class="btn btn-primary col-xs-12 col-sm-2 col-sm-offset-10">
+                	</form>
+                </div>
+                    <a href="index.html" class="btn btn-default"  data-translate="LBL_CLOSE">prev</a>
+                    <a class="btn btn-default pull-right" data-translate="LBL_NEXT">next</a>
+                </div>
+            </section>
+        </div>
+    </section>
+	</div>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="libs/angular.min.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>
